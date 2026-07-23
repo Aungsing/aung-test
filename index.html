@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Dragon Portal // Aung Testing</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Premium Cyber/Fantasy Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Orbitron:wght@400;600;800&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Cinematic Background Animation Canvas -->
+    <canvas id="bg-canvas"></canvas>
+    <div id="lightning-overlay"></div>
+
+    <!-- Background Music Support -->
+    <audio id="bg-music" loop>
+        <!-- Replace src with your audio file path when ready -->
+        <source src="ambient-cyber-darkness.mp3" type="audio/mpeg">
+    </audio>
+    <button id="audio-toggle" onclick="toggleAudio()" title="Toggle Presentation Music">
+        <svg viewBox="0 0 24 24" id="audio-icon"><path fill="currentColor" d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.85 14,18.71V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.77 16.5,12M11,28l-5-5H2V11h4l5-5v22Z"/></svg>
+    </button>
+
+    <!-- Global Error Toast Notification -->
+    <div id="error-popup" class="error-popup-hidden">
+        <div class="error-content">
+            <svg class="error-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M13 14H11V9H13M13 18H11V16H13M1 21H23L12 2L1 21Z"/></svg>
+            <span>Try another tool.</span>
+        </div>
+    </div>
+
+    <!-- MAIN PORTAL WRAPPER -->
+    <main id="portal-container">
+        
+        <!-- ================= LOGIN SCREEN ================= -->
+        <section id="login-screen" class="screen active-screen">
+            <!-- Decorative Flaming Dragon Wings Accents -->
+            <div class="dragon-accent left-wing"></div>
+            <div class="dragon-accent right-wing"></div>
+            
+            <div class="glass-card" id="login-card">
+                <div class="card-header">
+                    <div class="dragon-logo">
+                        <!-- Custom Cyber Dragon Emblem Inline SVG -->
+                        <svg viewBox="0 0 100 100" class="logo-svg">
+                            <path d="M50,10 C45,25 30,35 15,35 C35,45 45,65 50,90 C55,65 65,45 85,35 C70,35 55,25 50,10 Z" class="dragon-core"/>
+                            <circle cx="43" cy="40" r="2" fill="#ff003c" class="dragon-eye"/>
+                            <circle cx="57" cy="40" r="2" fill="#ff003c" class="dragon-eye"/>
+                        </svg>
+                    </div>
+                    <h1 class="glow-text-gold">WELCOME AUNG</h1>
+                    <p class="subtitle">Presentation Testing</p>
+                </div>
+
+                <form id="login-form" onsubmit="handleLogin(event)">
+                    <div class="input-group">
+                        <label for="username">OPERATOR IDENTITY</label>
+                        <div class="input-wrapper">
+                            <input type="text" id="username" autocomplete="off" placeholder="Enter username..." required>
+                            <span class="input-line"></span>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="password">SECURE ENCRYPTION KEY</label>
+                        <div class="input-wrapper">
+                            <input type="password" id="password" placeholder="Enter password..." required>
+                            <span class="input-line"></span>
+                            <button type="button" id="toggle-password" onclick="togglePasswordVisibility()">
+                                <svg id="eye-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,4.5C7,4.5 2.73,7.61 1 12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z"/></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="remember-me">
+                            <span class="checkmark"></span>
+                            Remember Access Node
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-cyber">
+                        <span class="btn-text">INITIALIZE AUTHENTICATION</span>
+                        <span class="btn-glitch"></span>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ================= SUCCESS SCREEN ================= -->
+        <section id="success-screen" class="screen hidden-screen">
+            <div class="success-header">
+                <h1 class="glow-text-red presentation-title">YOU PASS AUNG TESTING</h1>
+                <div class="status-strip">
+                    <p class="success-sub">Congratulations.</p>
+                    <p class="success-sub technical-flash">Authentication Successful.</p>
+                </div>
+            </div>
+
+            <!-- PREMIUM BLACK BADGE -->
+            <div class="black-badge-container">
+                <div class="metallic-badge">
+                    <div class="badge-internal-glow"></div>
+                    <div class="badge-header">
+                        <span class="cyber-tag">SYS.ACCESS.GRANTED</span>
+                        <h2>BLACK BADGE</h2>
+                    </div>
+                    
+                    <div class="badge-center">
+                        <!-- Premium CTF / Cyber Achievement Emblem -->
+                        <div class="badge-icon-wrapper">
+                            <svg viewBox="0 0 100 100" class="ctf-badge-svg">
+                                <polygon points="50,5 95,25 95,75 50,95 5,75 5,25" class="badge-shield"/>
+                                <path d="M30,40 L50,25 L70,40 L70,60 L50,75 L30,60 Z" class="badge-inner-mesh"/>
+                                <path d="M50,35 L60,48 L40,52 Z" fill="#ff003c" class="badge-core-fire"/>
+                            </svg>
+                        </div>
+                        <div class="badge-number-display">
+                            <span class="num-label">ID NO.</span>
+                            <span class="num-val">1</span>
+                        </div>
+                    </div>
+
+                    <div class="badge-footer">
+                        <div class="badge-meta">
+                            <div class="meta-row">
+                                <span class="meta-label">RANK</span>
+                                <span class="meta-val gold-highlight">1 / 100</span>
+                            </div>
+                            <div class="meta-row">
+                                <span class="meta-label">OPERATION</span>
+                                <span class="meta-val">CTF Achievement</span>
+                            </div>
+                            <div class="meta-row">
+                                <span class="meta-label">CLEARANCE</span>
+                                <span class="meta-val red-pulse-text">Elite Access</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
